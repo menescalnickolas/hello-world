@@ -1,11 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, TextInput, View, Text, Alert, Button, ScrollView } from 'react-native';
+import { useState } from 'react';
 
-export default function App() {
+const App = () => {
+
+  const [text, setText] = useState('');
+
+  const alertMyText = () => {
+    Alert.alert(text);
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <TextInput
+        style={styles.textInput}
+        value={text}
+        onChangeText={setText}
+        placeholder='What is your name?'
+      />
+
+      <Text style={styles.textDisplay}>Your name is: {text}</Text>
+
+      <Button
+        onPress={() => {
+          alertMyText();
+        }}
+        title="Press Me"
+      />
     </View>
   );
 }
@@ -13,8 +33,22 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center'
   },
+
+  textInput: {
+    width: '88%',
+    borderWidth: 1,
+    height: 50,
+    padding: 10
+  },
+
+  textDisplay: {
+    height: 50,
+    lineHeight: 50
+  }
+
 });
+
+export default App;
